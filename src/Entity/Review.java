@@ -10,6 +10,11 @@ public class Review {
     private String text;
     private double mark;
 
+    public Review(String text, double mark) {
+        this.text = text;
+        this.mark = mark;
+    }
+
     public Review(Film film, User user, String text, double mark) {
         this.film = film;
         this.user = user;
@@ -23,10 +28,6 @@ public class Review {
         this.user = user;
         this.text = text;
         this.mark = mark;
-    }
-
-    public Review(long id) {
-        this.id = id;
     }
 
     @Override

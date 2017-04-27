@@ -1,7 +1,10 @@
 package Service;
 
 import Dao.UserDao;
+import Entity.Role;
 import Entity.User;
+
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -23,13 +26,18 @@ public class UserService {
         return INSTANCE;
     }
 
-    public User addUser (User user){
-        Optional<User> save = UserDao.getInstance().save(user);
+    public User addUser(User user) {
+        UserDao.getInstance().save(user);
         return user;
     }
 
-    public User userInfo (User user){
-        Optional<User> info = UserDao.getInstance().info(user);
+    public User userInfo(User user) {
+        UserDao.getInstance().info(user);
         return user;
+    }
+
+    public List<Role> allRole() {
+        return UserDao.getInstance().findAllRole();
+
     }
 }

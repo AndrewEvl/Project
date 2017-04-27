@@ -3,8 +3,6 @@ package Service;
 import Dao.ReviewsDao;
 import Entity.Review;
 
-import java.util.Optional;
-
 /**
  * Created by User on 18.04.2017.
  */
@@ -23,7 +21,12 @@ public class ReviewService {
         return INSTANCE;
     }
     public Review addReview (Review review){
-        Optional<Review> save = ReviewsDao.getInstance().save(review);
+        ReviewsDao.getInstance().save(review);
+        return review;
+    }
+
+    public Review saveReview (Review review){
+        ReviewsDao.getInstance().addReview(review);
         return review;
     }
 }

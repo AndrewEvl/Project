@@ -32,11 +32,28 @@ public class ReviewsDao {
         try (Connection connection = ConnectionManager.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement
                     ("INSERT INTO reviews (text, mark, film_id, user_id) VALUES (?, ?, ?, ?)"
-                            , Statement.RETURN_GENERATED_KEYS);{
+                            , Statement.RETURN_GENERATED_KEYS);
+            {
                 preparedStatement.setString(1, review.getText());
                 preparedStatement.setDouble(2, review.getMark());
                 preparedStatement.setLong(3, review.getFilm().getId());
                 preparedStatement.setLong(4, review.getUser().getId());
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Optional<Review> addReview(Review review) {
+        try (Connection connection = ConnectionManager.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement
+                    ("INSERT INTO reviews (text, mark) VALUES (?, ?)"
+                            , Statement.RETURN_GENERATED_KEYS);
+            {
+                preparedStatement.setString(1, review.getText());
+                preparedStatement.setDouble(2, review.getMark());
                 preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {

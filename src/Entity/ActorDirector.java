@@ -13,6 +13,20 @@ public class ActorDirector {
     private String lastName;
     private LocalDate birthdayDay;
     private Set<Film> film = new HashSet<>();
+    private Role role;
+
+    public ActorDirector(String firstName, String lastName, LocalDate birthdayDay) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthdayDay = birthdayDay;
+    }
+
+    public ActorDirector(String firstName, String lastName, LocalDate birthdayDay, Role role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthdayDay = birthdayDay;
+        this.role = role;
+    }
 
     public ActorDirector(String firstName, String lastName, LocalDate birthdayDay, Set<Film> film) {
         this.firstName = firstName;
@@ -97,5 +111,13 @@ public class ActorDirector {
 
     public void setFilm(Set<Film> film) {
         this.film = film;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

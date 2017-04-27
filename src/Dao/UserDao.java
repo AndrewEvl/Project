@@ -1,9 +1,12 @@
 package Dao;
 
+import Entity.Role;
 import Entity.User;
 import connection.ConnectionManager;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -44,11 +47,11 @@ public class UserDao {
                 }
             }
             //try (PreparedStatement preparedStatement = connection.prepareStatement(
-                   // ("INSERT INTO user_role_user (users_id, users_role_id) VALUES (?, ?)"))) {
-               // preparedStatement.setLong(1, user.getId());
-                //preparedStatement.setString(2, "user_role_id");
-                //preparedStatement.executeUpdate();
-           // }
+            // ("INSERT INTO user_role_user (users_id, users_role_id) VALUES (?, ?)"))) {
+            // preparedStatement.setLong(1, user.getId());
+            //preparedStatement.setString(2, "user_role_id");
+            //preparedStatement.executeUpdate();
+            // }
             //connection.commit();
             return Optional.of(user);
         } catch (SQLException e) {
@@ -62,7 +65,7 @@ public class UserDao {
             try (PreparedStatement preparedStatement = connection.prepareStatement
                     ("SELECT nick_name, first_name, last_name, birthday FROM users")) {
                 ResultSet resultSet = preparedStatement.executeQuery();
-                while (resultSet.next()){
+                while (resultSet.next()) {
                     resultSet.getString(user.getNickName());
                     resultSet.getString(user.getFirstName());
                     resultSet.getString(user.getLastName());
@@ -74,5 +77,23 @@ public class UserDao {
             e.printStackTrace();
         }
         return Optional.empty();
+    }
+
+    public List<Role> findAllRole() {
+        List<Role> role = new ArrayList<>();
+        try (Connection connection = ConnectionManager.getConnection()) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement
+                    ("SELECT * FROM role")) {
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        role.add(new Role(resultSet.getLong("role.id"),
+                                resultSet.getString("role.role")));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return role;
     }
 }

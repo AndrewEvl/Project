@@ -1,5 +1,6 @@
 package Entity;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,43 +15,51 @@ public class Film {
     private Set<ActorDirector> director = new HashSet<>();
     private LocalDate releaseDay;
     private String county;
-    private String genre;
+    private Ganre ganre;
     private Set<Review> reviews = new HashSet<>();
+
+    public Film(String name, LocalDate releaseDay, String county) {
+        this.name = name;
+        this.releaseDay = releaseDay;
+        this.county = county;
+    }
+
+    public Film(long id) {
+        this.id = id;
+    }
+
+    public Film (Ganre genre, long id) {
+        this.id = id;
+        this.ganre = genre;
+    }
+
+    public Film(String name) {
+        this.name = name;
+    }
 
     public Film(LocalDate releaseDay) {
         this.releaseDay = releaseDay;
     }
 
-    public Film(String name, LocalDate releaseDay, String county, String genre) {
+    public Film(String name, LocalDate releaseDay, String county, Ganre genre) {
         this.name = name;
         this.releaseDay = releaseDay;
         this.county = county;
-        this.genre = genre;
+        this.ganre = genre;
     }
 
     public Film(LocalDate releaseDay, String name) {
-        this.id = id;
         this.name = name;
-        this.actors = actors;
-        this.director = director;
         this.releaseDay = releaseDay;
-        this.county = county;
-        this.genre = genre;
-        this.reviews = reviews;
     }
 
-    public Film(String name, Set<ActorDirector> actors, Set<ActorDirector> director, LocalDate releaseDay, String county, String genre, Set<Review> reviews) {
-        this.name = name;
-        this.actors = actors;
-        this.director = director;
-        this.releaseDay = releaseDay;
-        this.county = county;
-        this.genre = genre;
-        this.reviews = reviews;
-    }
 
     public Film(long id, String name) {
         this.id = id;
+    }
+
+    public Film(String name, Date date, String string, String resultSetString) {
+        this.name = name;
     }
 
     @Override
@@ -62,7 +71,7 @@ public class Film {
                 ", director=" + director +
                 ", releaseDay=" + releaseDay +
                 ", county='" + county + '\'' +
-                ", genre='" + genre + '\'' +
+                ", genre='" + ganre + '\'' +
                 ", reviews=" + reviews +
                 '}';
     }
@@ -71,9 +80,7 @@ public class Film {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Film film = (Film) o;
-
         return id == film.id;
     }
 
@@ -130,12 +137,12 @@ public class Film {
         this.county = county;
     }
 
-    public String getGenre() {
-        return genre;
+    public Ganre getGenre() {
+        return ganre;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setGenre(Ganre genre) {
+        this.ganre = genre;
     }
 
     public Set<Review> getReviews() {

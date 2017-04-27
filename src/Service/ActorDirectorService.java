@@ -2,6 +2,8 @@ package Service;
 
 import Dao.ActorDirectorDao;
 import Entity.ActorDirector;
+import Entity.Ganre;
+import Entity.Role;
 
 import java.util.Optional;
 
@@ -22,8 +24,8 @@ public class ActorDirectorService {
         }
         return INSTANCE;
     }
-    public ActorDirector addActorDirector (ActorDirector actorDirector){
-        Optional<ActorDirector> save = ActorDirectorDao.getInstance().save(actorDirector);
+    public ActorDirector addActorDirector (ActorDirector actorDirector, Role role){
+        ActorDirectorDao.getInstance().save(actorDirector, role);
         return actorDirector;
     }
 }
